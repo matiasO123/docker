@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  apache-server:
+    build: .
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/html
+    networks:
+      - practica-net
+    depends_on:
+      - mysql-server
+
+  mysql-server:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: clave123
+      MYSQL_DATABASE: practica
+    ports:
+      - "3307:3306"
+    networks:
+      - practica-net
+
+networks:
+  practica-net:
